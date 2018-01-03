@@ -1,0 +1,22 @@
+const hej = [
+	{
+		"id": "1",
+		"image": "misc",
+		"z-index": 1
+	},
+  {
+    "id": "2",
+    "image": "misc",
+    "z-index": 2
+  },
+  {
+    "id": "3",
+    "image": "misc",
+    "z-index": 3
+  },
+  {
+    "id": "4",
+    "image": "misc",
+    "z-index": 4
+  },
+]
