@@ -38,3 +38,28 @@ body, html {
   left: 0;
   top: 0;
 }
+
+.bg-img:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(to bottom right);
+  opacity: .5;
+}
+
+.slideshow__text-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.slideshow__text-container h2 {
+  color: #fff;
+  font-size: 45px;
+}

@@ -5,9 +5,13 @@ var targetId;
 var slides;
 var homeTop;
 var height;
+var textContainer = []
+var translateY
 
 //set height depending on content height when window loads.
 $(document).ready(function() {
+  var createTextContainer = Array.from(document.querySelectorAll('.slideshow__text-container'));
+  textContainer.push(createTextContainer)
   slides = Array.from(document.querySelectorAll('.slideshow__slide'))
   resizeResizeableHeight()
 //set id going form 0 - up  and z-index to top - 0 on each of the elements in .slide
@@ -42,7 +46,7 @@ function getVisible(position) {
       ? scrollBot
       : elBottom;
 //
-
+  translateY = (scrollTop - elTop) / $(window).height() * 100;
   scale = (height + homeTop + elTop) / height;
   opacity = (height - homeTop + elTop) / height;
   opacity = parseFloat(Math.round(opacity * 100) / 100).toFixed(3);
@@ -70,6 +74,7 @@ function changeBackground() {
         if(opacity <= 0) {
           opacity++
           scale--
+          translateY -= 100
         }
     }
   }
@@ -83,10 +88,25 @@ function changeBackground() {
   targetId = getTargetId[0]
 
   //change styles on chosen target.
+  $(targetId).children('.slideshow__text-container').css('opacity', 1)
+  $(targetId).children('').css('opacity', 1)
   $(targetId).css('opacity', opacity)
   $(targetId).children('.bg-img').css({
     transform: 'scale(' + scale + ')'
   });
+
+  $(targetId).children('.bg-img').children('.slideshow__text-container').css(
+    'transform', 'translateY(-' + translateY + 'px)'
+  );
+
+  console.log(translateY)
+
+
+  // $('body').css('transform', 'translateY(-' + opacity + 'px)');
+
+  // "-webkit-transform":"translate(100px,100px)"
+
+
 
   if (targetId) {
     $( targetId).prevAll(targetId).css( "opacity" , 0 );
@@ -111,6 +131,10 @@ function resizeResizeableHeight() {
 //Reset height
 function resetHeight() {
   height = $(this).height();
+}
+
+function textContainer () {
+
 }
 
 
