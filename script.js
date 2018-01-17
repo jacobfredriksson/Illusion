@@ -1,5 +1,6 @@
 var scale;
 var opacity;
+var textOpacity;
 var targetArray = [];
 var targetId;
 var slides;
@@ -7,6 +8,7 @@ var homeTop;
 var height;
 var textContainer = []
 var translateY
+
 
 //set height depending on content height when window loads.
 $(document).ready(function() {
@@ -47,10 +49,12 @@ function getVisible(position) {
       : elBottom;
 //
   translateY = (scrollTop - elTop) / $(window).height() * 100;
-  scale = (height + homeTop + elTop) / height;
+  scale = (height + homeTop + elTop ) / height;
+  textOpacity = (height + homeTop + elTop ) / height -1.4;
   opacity = (height - homeTop + elTop) / height;
   opacity = parseFloat(Math.round(opacity * 100) / 100).toFixed(3);
   scale = parseFloat(Math.round(scale * 100) / 100).toFixed(3);
+tetextOpacity = parseFloat(Math.round(textOpacity * 100) / 100).toFixed(3);
 
   changeBackground()
   resizeResizeableHeight()
@@ -75,6 +79,7 @@ function changeBackground() {
           opacity++
           scale--
           translateY -= 100
+          textOpacity -= 1
         }
     }
   }
@@ -87,19 +92,28 @@ function changeBackground() {
   //Target id will always be on first spot in the filtred array.
   targetId = getTargetId[0]
 
+
   //change styles on chosen target.
   $(targetId).children('.slideshow__text-container').css('opacity', 1)
-  $(targetId).children('').css('opacity', 1)
-  $(targetId).css('opacity', opacity)
+  // $(targetId).children('').css('opacity', 1)
+  var testa = $(targetId).css('opacity', opacity)
   $(targetId).children('.bg-img').css({
     transform: 'scale(' + scale + ')'
   });
 
-  $(targetId).children('.bg-img').children('.slideshow__text-container').css(
+   $(targetId).children('.bg-img').children('.slideshow__text-container').css(
     'transform', 'translateY(-' + translateY + 'px)'
   );
 
-  console.log(translateY)
+  // console.log(textOpacity)
+
+  // if(targetId.style.opacity == 1) {
+    $(targetId).next().children('.bg-img').children('.slideshow__text-container').css(
+      'opacity', textOpacity
+   );
+
+
+  console.log($(targetId).next().children('.bg-img').children('.slideshow__text-container').css('opacity'))
 
 
   // $('body').css('transform', 'translateY(-' + opacity + 'px)');
